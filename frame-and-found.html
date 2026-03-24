@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frame & Found</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #111110;
+    --white: #f9f7f4;
+    --cream: #f0ece4;
+    --muted: #888780;
+    --accent: #BA7517;
+    --accent-light: #FAEEDA;
+    --border: rgba(17,17,16,0.1);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--black); font-size: 16px; line-height: 1.6; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 3rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--white); z-index: 100; }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.4rem; letter-spacing: -0.02em; }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.875rem; transition: color 0.2s; letter-spacing: 0.02em; }
+  .nav-links a:hover { color: var(--black); }
+  .nav-cta { font-size: 0.875rem; font-weight: 500; background: var(--black); color: var(--white); border: none; padding: 0.6rem 1.4rem; border-radius: 2rem; cursor: pointer; text-decoration: none; transition: opacity 0.2s; }
+  .nav-cta:hover { opacity: 0.8; }
+
+  .hero { padding: 6rem 3rem 4rem; max-width: 1100px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 5.5vw, 5rem); line-height: 1.02; letter-spacing: -0.03em; margin-bottom: 2rem; max-width: 14ch; }
+  .hero-title em { font-style: italic; color: var(--accent); }
+  .hero-lower { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-top: 1rem; }
+  .hero-desc { font-size: 1.05rem; color: var(--muted); line-height: 1.85; max-width: 36ch; }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; margin-top: 2rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--black); color: var(--white); padding: 0.9rem 2rem; border-radius: 2rem; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.8; }
+  .btn-ghost { color: var(--black); font-size: 0.9rem; text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 0.1rem; }
+  .hero-video-row { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem; align-items: end; }
+  .video-card { border-radius: 1rem; overflow: hidden; position: relative; cursor: pointer; }
+  .video-card-main { aspect-ratio: 16/10; }
+  .video-card-side { aspect-ratio: 9/10; }
+  .video-bg { width: 100%; height: 100%; display: flex; align-items: flex-end; padding: 1.25rem; position: relative; }
+  .vc1 { background: linear-gradient(160deg, #FAC775 0%, #854F0B 100%); }
+  .vc2 { background: linear-gradient(160deg, #D3D1C7 0%, #444441 100%); }
+  .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); width: 48px; height: 48px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .play-btn svg { width: 18px; height: 18px; fill: white; margin-left: 3px; }
+  .video-label { font-size: 0.75rem; font-weight: 500; color: rgba(255,255,255,0.9); letter-spacing: 0.05em; text-transform: uppercase; }
+  .video-name { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-top: 0.2rem; }
+  .trust-bar { display: flex; align-items: center; gap: 1.5rem; margin-top: 2rem; }
+  .trust-avatars { display: flex; }
+  .avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--white); margin-left: -8px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 500; }
+  .avatar:first-child { margin-left: 0; }
+  .av1 { background: #FAEEDA; color: #854F0B; }
+  .av2 { background: #E1F5EE; color: #0F6E56; }
+  .av3 { background: #EEEDFE; color: #534AB7; }
+  .av4 { background: #FAECE7; color: #993C1D; }
+  .trust-text { font-size: 0.8rem; color: var(--muted); }
+  .trust-text strong { color: var(--black); font-weight: 500; }
+
+  .marquee-wrap { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 0; overflow: hidden; background: var(--black); margin: 3rem 0 0; }
+  .marquee-inner { display: flex; gap: 3rem; white-space: nowrap; animation: marquee 22s linear infinite; }
+  .marquee-item { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+  .marquee-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .section { max-width: 1100px; margin: 0 auto; padding: 5rem 3rem; }
+  .section-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .about-body { font-size: 0.95rem; color: var(--muted); line-height: 1.9; }
+  .about-body + .about-body { margin-top: 1.25rem; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.8rem; line-height: 1; margin-bottom: 0.4rem; color: var(--accent); }
+  .stat-desc { font-size: 0.8rem; color: var(--muted); }
+
+  .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .portfolio-item { border-radius: 0.875rem; overflow: hidden; cursor: pointer; }
+  .portfolio-thumb { aspect-ratio: 3/4; width: 100%; position: relative; overflow: hidden; }
+  .portfolio-thumb-inner { width: 100%; height: 100%; transition: transform 0.5s ease; display: flex; align-items: flex-end; padding: 1.25rem; position: relative; }
+  .portfolio-item:hover .portfolio-thumb-inner { transform: scale(1.04); }
+  .p1 .portfolio-thumb-inner { background: linear-gradient(160deg, #FAEEDA 0%, #BA7517 100%); }
+  .p2 .portfolio-thumb-inner { background: linear-gradient(160deg, #E1F5EE 0%, #0F6E56 100%); }
+  .p3 .portfolio-thumb-inner { background: linear-gradient(160deg, #EEEDFE 0%, #534AB7 100%); }
+  .p4 .portfolio-thumb-inner { background: linear-gradient(160deg, #f5e8e4 0%, #993C1D 100%); }
+  .p5 .portfolio-thumb-inner { background: linear-gradient(160deg, #D3D1C7 0%, #2C2C2A 100%); }
+  .p6 .portfolio-thumb-inner { background: linear-gradient(160deg, #DDF0E8 0%, #1D9E75 100%); }
+  .play-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); width: 42px; height: 42px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .play-overlay svg { width: 14px; height: 14px; fill: white; margin-left: 2px; }
+  .thumb-label { position: relative; z-index: 1; }
+  .thumb-tag { display: inline-block; background: rgba(255,255,255,0.2); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 2rem; color: white; border: 1px solid rgba(255,255,255,0.3); }
+  .portfolio-meta { padding: 0.75rem 0 0; }
+  .portfolio-name { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.15rem; }
+  .portfolio-type { font-size: 0.8rem; color: var(--muted); }
+
+  .process-wrap { background: var(--black); padding: 5rem 0; margin: 3rem 0; }
+  .process-inner { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+  .process-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+  .process-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+  .process-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--white); margin-bottom: 3rem; max-width: 28ch; line-height: 1.2; }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .step { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.5rem; }
+  .step-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); margin-bottom: 1rem; }
+  .step-name { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-bottom: 0.6rem; }
+  .step-desc { font-size: 0.825rem; color: rgba(255,255,255,0.45); line-height: 1.8; }
+
+  .services-wrap { background: var(--cream); padding: 5rem 0; }
+  .services-inner { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1rem; }
+  .service-card { background: var(--white); border-radius: 1rem; padding: 2rem; border: 1px solid var(--border); }
+  .service-tag { display: inline-block; background: var(--accent-light); color: var(--accent); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 2rem; margin-bottom: 1.25rem; }
+  .service-name { font-family: 'DM Serif Display', serif; font-size: 1.35rem; margin-bottom: 0.75rem; line-height: 1.2; }
+  .service-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
+  .service-price { font-size: 0.8rem; display: flex; align-items: baseline; gap: 0.4rem; }
+  .price-from { color: var(--muted); }
+  .price-amount { font-family: 'DM Serif Display', serif; font-size: 1.6rem; }
+  .service-features { list-style: none; margin-top: 1.25rem; border-top: 1px solid var(--border); padding-top: 1.25rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .service-features li { font-size: 0.825rem; color: var(--muted); display: flex; align-items: center; gap: 0.6rem; }
+  .feature-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .service-card.featured { border-color: var(--accent); }
+  .service-card.featured .service-tag { background: var(--black); color: var(--white); }
+
+  .testimonial-wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 3rem; }
+  .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .testimonial-card { background: var(--cream); border-radius: 1rem; padding: 1.75rem; }
+  .stars { display: flex; gap: 3px; margin-bottom: 1rem; }
+  .star { width: 12px; height: 12px; background: var(--accent); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+  .testimonial-quote { font-size: 0.9rem; color: var(--black); line-height: 1.8; margin-bottom: 1.5rem; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 500; flex-shrink: 0; }
+  .author-name { font-size: 0.85rem; font-weight: 500; }
+  .author-biz { font-size: 0.75rem; color: var(--muted); }
+
+  .contact-section { max-width: 1100px; margin: 0 auto; padding: 5rem 3rem; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+  .contact-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.02em; }
+  .contact-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-detail { display: flex; flex-direction: column; gap: 0.8rem; }
+  .contact-row { font-size: 0.875rem; color: var(--muted); display: flex; gap: 0.5rem; }
+  .contact-row strong { color: var(--black); font-weight: 500; min-width: 70px; }
+  .form { display: flex; flex-direction: column; gap: 1.25rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .form-group input, .form-group textarea, .form-group select { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: var(--cream); border: 1px solid var(--border); border-radius: 0.6rem; padding: 0.75rem 1rem; color: var(--black); outline: none; width: 100%; transition: border-color 0.2s; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit { background: var(--black); color: var(--white); border: none; padding: 1rem 2rem; border-radius: 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; cursor: pointer; align-self: flex-start; transition: opacity 0.2s; }
+  .form-submit:hover { opacity: 0.8; }
+
+  footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; }
+  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; }
+  .footer-logo span { color: var(--accent); }
+  .footer-copy { font-size: 0.8rem; color: var(--muted); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+    .hero-lower { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-video-row { grid-template-columns: 1fr 1fr; }
+    .portfolio-grid, .services-grid, .testimonial-grid { grid-template-columns: 1fr 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .section, .testimonial-wrap, .contact-section { padding: 3rem 1.5rem; }
+    .process-inner, .services-inner { padding: 0 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Frame<span>&</span>Found</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Packages</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book a call</a>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">Founder video for small business</p>
+  <h1 class="hero-title">Your story is your <em>edge</em></h1>
+  <div class="hero-lower">
+    <div>
+      <p class="hero-desc">We help small business founders show up on camera with confidence — creating professional video content that builds trust, drives enquiries, and grows your brand.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary">Watch our work</a>
+        <a href="#services" class="btn-ghost">See packages</a>
+      </div>
+      <div class="trust-bar">
+        <div class="trust-avatars">
+          <div class="avatar av1">SR</div>
+          <div class="avatar av2">MK</div>
+          <div class="avatar av3">JT</div>
+          <div class="avatar av4">AL</div>
+        </div>
+        <div class="trust-text"><strong>80+ founders</strong> have told their story with us</div>
+      </div>
+    </div>
+    <div class="hero-video-row">
+      <div class="video-card video-card-main">
+        <div class="video-bg vc1">
+          <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div>
+            <div class="video-label">Featured story</div>
+            <div class="video-name">Kira's Ceramics Co.</div>
+          </div>
+        </div>
+      </div>
+      <div class="video-card video-card-side">
+        <div class="video-bg vc2">
+          <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div>
+            <div class="video-label">Brand film</div>
+            <div class="video-name">The Oak Desk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">Founder Story Videos <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Brand Films <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Social Content Packages <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Website Hero Videos <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Testimonial Reels <span class="marquee-dot"></span></span>
+    <span class="marquee-item">LinkedIn Video Strategy <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Founder Story Videos <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Brand Films <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Social Content Packages <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Website Hero Videos <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Testimonial Reels <span class="marquee-dot"></span></span>
+    <span class="marquee-item">LinkedIn Video Strategy <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<section class="section" id="about">
+  <div class="section-label">About us</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="about-title">We believe people buy from people — not logos</h2>
+      <div class="stats">
+        <div>
+          <div class="stat-num">80+</div>
+          <div class="stat-desc">Founders filmed</div>
+        </div>
+        <div>
+          <div class="stat-num">3×</div>
+          <div class="stat-desc">Avg. enquiry increase</div>
+        </div>
+        <div>
+          <div class="stat-num">1 day</div>
+          <div class="stat-desc">Typical shoot day</div>
+        </div>
+        <div>
+          <div class="stat-num">48hr</div>
+          <div class="stat-desc">First cut delivery</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="about-body">Frame & Found was built for small business owners who know they should be on camera — but aren't sure how to show up, what to say, or how to make it look professional without a Hollywood budget.</p>
+      <p class="about-body">We handle everything: the script, the shoot, the edit. You just show up and talk about what you love. We take it from there and turn it into video that actually converts.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="section-label">Recent founder stories</div>
+  <div class="portfolio-grid">
+    <div class="portfolio-item p1">
+      <div class="portfolio-thumb">
+        <div class="portfolio-thumb-inner">
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div class="thumb-label"><span class="thumb-tag">Founder Story</span></div>
+        </div>
+      </div>
+      <div class="portfolio-meta">
+        <div class="portfolio-name">Kira's Ceramics Co.</div>
+        <div class="portfolio-type">Retail & handmade goods</div>
+      </div>
+    </div>
+    <div class="portfolio-item p2">
+      <div class="portfolio-thumb">
+        <div class="portfolio-thumb-inner">
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div class="thumb-label"><span class="thumb-tag">Brand Film</span></div>
+        </div>
+      </div>
+      <div class="portfolio-meta">
+        <div class="portfolio-name">The Oak Desk</div>
+        <div class="portfolio-type">Bespoke furniture & design</div>
+      </div>
+    </div>
+    <div class="portfolio-item p3">
+      <div class="portfolio-thumb">
+        <div class="portfolio-thumb-inner">
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div class="thumb-label"><span class="thumb-tag">Social Pack</span></div>
+        </div>
+      </div>
+      <div class="portfolio-meta">
+        <div class="portfolio-name">Bloom Nutrition</div>
+        <div class="portfolio-type">Health & wellness coaching</div>
+      </div>
+    </div>
+    <div class="portfolio-item p4">
+      <div class="portfolio-thumb">
+        <div class="portfolio-thumb-inner">
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div class="thumb-label"><span class="thumb-tag">Hero Video</span></div>
+        </div>
+      </div>
+      <div class="portfolio-meta">
+        <div class="portfolio-name">Slade Law Co.</div>
+        <div class="portfolio-type">Legal services</div>
+      </div>
+    </div>
+    <div class="portfolio-item p5">
+      <div class="portfolio-thumb">
+        <div class="portfolio-thumb-inner">
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div class="thumb-label"><span class="thumb-tag">Founder Story</span></div>
+        </div>
+      </div>
+      <div class="portfolio-meta">
+        <div class="portfolio-name">Greystone Builds</div>
+        <div class="portfolio-type">Construction & trades</div>
+      </div>
+    </div>
+    <div class="portfolio-item p6">
+      <div class="portfolio-thumb">
+        <div class="portfolio-thumb-inner">
+          <div class="play-overlay"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div class="thumb-label"><span class="thumb-tag">Testimonial Reel</span></div>
+        </div>
+      </div>
+      <div class="portfolio-meta">
+        <div class="portfolio-name">Verdant Garden Co.</div>
+        <div class="portfolio-type">Landscaping & outdoor living</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="process-wrap">
+  <div class="process-inner">
+    <div class="process-label">How it works</div>
+    <p class="process-title">From camera-shy to camera-ready in four simple steps</p>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-name">Discovery call</div>
+        <div class="step-desc">We learn your story, your audience, and what you want your video to do — then we map out the plan.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-name">Script & prep</div>
+        <div class="step-desc">We write a custom script and send you everything you need to feel confident before the camera turns on.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-name">Shoot day</div>
+        <div class="step-desc">One relaxed shoot day at your location or ours. Our team handles all the direction — you just talk naturally.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-name">Deliver & launch</div>
+        <div class="step-desc">First cut within 48 hours. Final, polished videos ready to publish across your website, socials, and beyond.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="services-wrap" id="services">
+  <div class="services-inner">
+    <div class="section-label" style="margin-bottom: 2.5rem;">Packages & pricing</div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-tag">Starter</div>
+        <div class="service-name">The Origin Story</div>
+        <p class="service-desc">Perfect for founders who want a single, powerful video to anchor their website and introduce themselves to the world.</p>
+        <div class="service-price">
+          <span class="price-from">From</span>
+          <span class="price-amount">$1,200</span>
+        </div>
+        <ul class="service-features">
+          <li><span class="feature-dot"></span>Half-day shoot (up to 3 hrs)</li>
+          <li><span class="feature-dot"></span>1 × 2–3 min founder story video</li>
+          <li><span class="feature-dot"></span>Script & prep guide included</li>
+          <li><span class="feature-dot"></span>2 rounds of revisions</li>
+          <li><span class="feature-dot"></span>Delivered within 5 business days</li>
+        </ul>
+      </div>
+      <div class="service-card featured">
+        <div class="service-tag">Most popular</div>
+        <div class="service-name">The Full Picture</div>
+        <p class="service-desc">A full shoot day that gives you a flagship brand film plus a library of social-ready clips to use all year long.</p>
+        <div class="service-price">
+          <span class="price-from">From</span>
+          <span class="price-amount">$2,800</span>
+        </div>
+        <ul class="service-features">
+          <li><span class="feature-dot"></span>Full-day shoot (up to 8 hrs)</li>
+          <li><span class="feature-dot"></span>1 × brand film (3–5 min)</li>
+          <li><span class="feature-dot"></span>6 × short-form social clips</li>
+          <li><span class="feature-dot"></span>Script, coaching & shot list</li>
+          <li><span class="feature-dot"></span>Delivered within 7 business days</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-tag">Ongoing</div>
+        <div class="service-name">Always On</div>
+        <p class="service-desc">Monthly video content so you're consistently showing up — without the effort of planning and producing it yourself.</p>
+        <div class="service-price">
+          <span class="price-from">From</span>
+          <span class="price-amount">$900/mo</span>
+        </div>
+        <ul class="service-features">
+          <li><span class="feature-dot"></span>Monthly half-day shoot</li>
+          <li><span class="feature-dot"></span>8 × edited social videos/mo</li>
+          <li><span class="feature-dot"></span>Content strategy & calendar</li>
+          <li><span class="feature-dot"></span>Captions & platform sizing</li>
+          <li><span class="feature-dot"></span>Priority turnaround</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="testimonial-wrap">
+  <div class="section-label">What founders say</div>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+      <p class="testimonial-quote">"I'd been putting off getting on camera for two years. The Frame & Found team made it completely painless — and the final video had three new clients reaching out within a week."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar av1">SR</div>
+        <div>
+          <div class="author-name">Sarah R.</div>
+          <div class="author-biz">Founder, Kira's Ceramics Co.</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+      <p class="testimonial-quote">"I'm a builder, not a marketer. These guys turned a single shoot day into months of content. My enquiry form has not been quiet since."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar av3">JT</div>
+        <div>
+          <div class="author-name">James T.</div>
+          <div class="author-biz">Founder, Greystone Builds</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+      <p class="testimonial-quote">"The script they wrote sounded exactly like me — just better. I finally feel like my online presence actually reflects the business I've built."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar av2">MK</div>
+        <div>
+          <div class="author-name">Mia K.</div>
+          <div class="author-biz">Founder, Bloom Nutrition</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="contact-section" id="contact">
+  <div class="section-label">Get in touch</div>
+  <div class="contact-grid">
+    <div>
+      <h2 class="contact-title">Ready to tell your story?</h2>
+      <p class="contact-sub">Book a free 20-minute discovery call and we'll figure out exactly what kind of video will work best for your business.</p>
+      <div class="contact-detail">
+        <div class="contact-row"><strong>Email</strong> hello@frameandfound.co</div>
+        <div class="contact-row"><strong>Phone</strong> +61 8 9000 0000</div>
+        <div class="contact-row"><strong>Location</strong> Perth, Western Australia</div>
+        <div class="contact-row"><strong>Turnaround</strong> We reply within one business day</div>
+      </div>
+    </div>
+    <form class="form" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First name</label>
+          <input type="text" placeholder="Jane">
+        </div>
+        <div class="form-group">
+          <label>Last name</label>
+          <input type="text" placeholder="Smith">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email address</label>
+        <input type="email" placeholder="jane@yourbusiness.com">
+      </div>
+      <div class="form-group">
+        <label>Your business type</label>
+        <input type="text" placeholder="e.g. Café, law firm, personal trainer...">
+      </div>
+      <div class="form-group">
+        <label>Package interested in</label>
+        <select>
+          <option>The Origin Story — from $1,200</option>
+          <option>The Full Picture — from $2,800</option>
+          <option>Always On — from $900/mo</option>
+          <option>Not sure yet — let's chat</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Anything else we should know?</label>
+        <textarea placeholder="Tell us about your business, your goals, or any questions you have..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Book my free call →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Frame<span>&</span>Found</div>
+  <div class="footer-copy">© 2026 Frame & Found. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
