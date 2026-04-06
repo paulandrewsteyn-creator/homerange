@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home Range</title>
+<title>Frame & Found</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,17 +39,9 @@
   .btn-primary { background: var(--black); color: var(--white); padding: 0.9rem 2rem; border-radius: 2rem; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: opacity 0.2s; }
   .btn-primary:hover { opacity: 0.8; }
   .btn-ghost { color: var(--black); font-size: 0.9rem; text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 0.1rem; }
-  .hero-video-row { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem; align-items: end; }
-  .video-card { border-radius: 1rem; overflow: hidden; position: relative; cursor: pointer; }
-  .video-card-main { aspect-ratio: 16/10; }
-  .video-card-side { aspect-ratio: 9/10; }
-  .video-bg { width: 100%; height: 100%; display: flex; align-items: flex-end; padding: 1.25rem; position: relative; }
-  .vc1 { background: linear-gradient(160deg, #FAC775 0%, #854F0B 100%); }
-  .vc2 { background: linear-gradient(160deg, #D3D1C7 0%, #444441 100%); }
-  .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); width: 48px; height: 48px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-  .play-btn svg { width: 18px; height: 18px; fill: white; margin-left: 3px; }
-  .video-label { font-size: 0.75rem; font-weight: 500; color: rgba(255,255,255,0.9); letter-spacing: 0.05em; text-transform: uppercase; }
-  .video-name { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-top: 0.2rem; }
+  .hero-video-row { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  .video-embed-wrap { border-radius: 1rem; overflow: hidden; position: relative; aspect-ratio: 16/9; background: var(--black); }
+  .video-embed-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
   .trust-bar { display: flex; align-items: center; gap: 1.5rem; margin-top: 2rem; }
   .trust-avatars { display: flex; }
   .avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--white); margin-left: -8px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 500; }
@@ -162,7 +154,6 @@
     .nav-links { display: none; }
     .hero, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
     .hero-lower { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-video-row { grid-template-columns: 1fr 1fr; }
     .portfolio-grid, .services-grid, .testimonial-grid { grid-template-columns: 1fr 1fr; }
     .process-steps { grid-template-columns: 1fr 1fr; }
     .section, .testimonial-wrap, .contact-section { padding: 3rem 1.5rem; }
@@ -174,7 +165,7 @@
 <body>
 
 <nav>
-  <div class="nav-logo">Home Range</div>
+  <div class="nav-logo">Frame<span>&</span>Found</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
@@ -191,7 +182,7 @@
     <div>
       <p class="hero-desc">We help small business founders show up on camera with confidence — creating professional video content that builds trust, drives enquiries, and grows your brand.</p>
       <div class="hero-actions">
-        <a href="#work" class="btn-primary">See our work</a>
+        <a href="#work" class="btn-primary">Watch our work</a>
         <a href="#services" class="btn-ghost">See packages</a>
       </div>
       <div class="trust-bar">
@@ -205,23 +196,14 @@
       </div>
     </div>
     <div class="hero-video-row">
-      <div class="video-card video-card-main">
-        <div class="video-bg vc1">
-          <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-          <div>
-            <div class="video-label">Featured story</div>
-            <div class="video-name">Kira's Ceramics Co.</div>
-          </div>
-        </div>
-      </div>
-      <div class="video-card video-card-side">
-        <div class="video-bg vc2">
-          <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-          <div>
-            <div class="video-label">Brand film</div>
-            <div class="video-name">The Oak Desk</div>
-          </div>
-        </div>
+      <!-- HERO VIDEO — to swap, replace RUpj6ii47Zo with your new YouTube video ID -->
+      <div class="video-embed-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/RUpj6ii47Zo?rel=0&modestbranding=1"
+          title="Frame & Found — Featured founder story"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
       </div>
     </div>
   </div>
@@ -528,7 +510,7 @@
 </section>
 
 <footer>
-  <div class="footer-logo">Home Range</div>
+  <div class="footer-logo">Frame<span>&</span>Found</div>
   <div class="footer-copy">© 2026 Frame & Found. All rights reserved.</div>
 </footer>
 
