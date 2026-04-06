@@ -48,12 +48,19 @@
   .trust-text { font-size: 0.8rem; color: var(--muted); }
   .trust-text strong { color: var(--black); font-weight: 500; }
 
-  /* VIDEO GRID */
-  .hero-videos { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  /* FOUNDER VIDEO */
+  .founder-video-wrap { margin-bottom: 1rem; }
+  .founder-video-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+  .founder-video-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   .video-embed-wrap { border-radius: 1rem; overflow: hidden; position: relative; aspect-ratio: 16/9; background: var(--black); }
   .video-embed-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
   .video-caption { font-size: 0.8rem; color: var(--muted); margin-top: 0.6rem; }
   .video-caption strong { color: var(--black); font-weight: 500; }
+
+  /* EXAMPLE VIDEOS */
+  .examples-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; margin-top: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+  .examples-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .hero-videos { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
 
   .marquee-wrap { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 0; overflow: hidden; background: var(--black); margin: 3rem 0 0; }
   .marquee-inner { display: flex; gap: 3rem; white-space: nowrap; animation: marquee 22s linear infinite; }
@@ -195,13 +202,14 @@
     <div class="trust-text"><strong>80+ founders</strong> have told their story with us</div>
   </div>
 
-  <!-- HERO VIDEOS — to swap, replace the YouTube ID after /embed/ with your new video ID -->
+  <!-- EXAMPLE VIDEOS — swap the IDs after /embed/ to update each video -->
+  <div class="examples-label">Example client videos</div>
   <div class="hero-videos">
     <div>
       <div class="video-embed-wrap">
         <iframe
           src="https://www.youtube.com/embed/-OPm0ic3KmY?rel=0&modestbranding=1"
-          title="Home Range — Featured founder story"
+          title="Home Range — Client example 1"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
@@ -212,7 +220,7 @@
       <div class="video-embed-wrap">
         <iframe
           src="https://www.youtube.com/embed/7sbL5rxPxfA?rel=0&modestbranding=1"
-          title="Home Range — Brand film"
+          title="Home Range — Client example 2"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
@@ -267,6 +275,19 @@
       <p class="about-body">Home Range was built for small business owners who know they should be on camera — but aren't sure how to show up, what to say, or how to make it look professional without a Hollywood budget.</p>
       <p class="about-body">We handle everything: the script, the shoot, the edit. You just show up and talk about what you love. We take it from there and turn it into video that actually converts.</p>
     </div>
+  </div>
+</section>
+
+<!-- FOUNDER VIDEO — swap T6Tm38iWzCc with your new YouTube video ID to update -->
+<section class="section">
+  <div class="founder-video-label">Our founder story</div>
+  <div class="video-embed-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/T6Tm38iWzCc?rel=0&modestbranding=1"
+      title="Home Range — Our founder story"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
   </div>
 </section>
 
@@ -479,7 +500,7 @@
       <h2 class="contact-title">Ready to tell your story?</h2>
       <p class="contact-sub">Book a free 20-minute discovery call and we'll figure out exactly what kind of video will work best for your business.</p>
       <div class="contact-detail">
-        <div class="contact-row"><strong>Email</strong> hello@homerange.co</div>
+        <div class="contact-row"><strong>Email</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c14191010133c141311190e1d121b19521f13">[email&#160;protected]</a></div>
         <div class="contact-row"><strong>Phone</strong> +61 8 9000 0000</div>
         <div class="contact-row"><strong>Location</strong> Perth, Western Australia</div>
         <div class="contact-row"><strong>Turnaround</strong> We reply within one business day</div>
@@ -523,9 +544,4 @@
 </section>
 
 <footer>
-  <div class="footer-logo">Home Range</div>
-  <div class="footer-copy">© 2026 Home Range. All rights reserved.</div>
-</footer>
-
-</body>
-</html>
+  <div class="footer-log
