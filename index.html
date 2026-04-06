@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Frame & Found</title>
+<title>Home Range</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -21,7 +21,6 @@
 
   nav { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 3rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--white); z-index: 100; }
   .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.4rem; letter-spacing: -0.02em; }
-  .nav-logo span { color: var(--accent); }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.875rem; transition: color 0.2s; letter-spacing: 0.02em; }
   .nav-links a:hover { color: var(--black); }
@@ -31,18 +30,14 @@
   .hero { padding: 6rem 3rem 4rem; max-width: 1100px; margin: 0 auto; }
   .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
   .hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
-  .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 5.5vw, 5rem); line-height: 1.02; letter-spacing: -0.03em; margin-bottom: 2rem; max-width: 14ch; }
+  .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 5.5vw, 5rem); line-height: 1.02; letter-spacing: -0.03em; margin-bottom: 1rem; max-width: 14ch; }
   .hero-title em { font-style: italic; color: var(--accent); }
-  .hero-lower { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-top: 1rem; }
-  .hero-desc { font-size: 1.05rem; color: var(--muted); line-height: 1.85; max-width: 36ch; }
-  .hero-actions { display: flex; gap: 1rem; align-items: center; margin-top: 2rem; flex-wrap: wrap; }
+  .hero-desc { font-size: 1.05rem; color: var(--muted); line-height: 1.85; max-width: 52ch; margin-bottom: 2rem; }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; }
   .btn-primary { background: var(--black); color: var(--white); padding: 0.9rem 2rem; border-radius: 2rem; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: opacity 0.2s; }
   .btn-primary:hover { opacity: 0.8; }
   .btn-ghost { color: var(--black); font-size: 0.9rem; text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 0.1rem; }
-  .hero-video-row { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-  .video-embed-wrap { border-radius: 1rem; overflow: hidden; position: relative; aspect-ratio: 16/9; background: var(--black); }
-  .video-embed-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
-  .trust-bar { display: flex; align-items: center; gap: 1.5rem; margin-top: 2rem; }
+  .trust-bar { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 3rem; }
   .trust-avatars { display: flex; }
   .avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--white); margin-left: -8px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 500; }
   .avatar:first-child { margin-left: 0; }
@@ -52,6 +47,13 @@
   .av4 { background: #FAECE7; color: #993C1D; }
   .trust-text { font-size: 0.8rem; color: var(--muted); }
   .trust-text strong { color: var(--black); font-weight: 500; }
+
+  /* VIDEO GRID */
+  .hero-videos { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .video-embed-wrap { border-radius: 1rem; overflow: hidden; position: relative; aspect-ratio: 16/9; background: var(--black); }
+  .video-embed-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+  .video-caption { font-size: 0.8rem; color: var(--muted); margin-top: 0.6rem; }
+  .video-caption strong { color: var(--black); font-weight: 500; }
 
   .marquee-wrap { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 0; overflow: hidden; background: var(--black); margin: 3rem 0 0; }
   .marquee-inner { display: flex; gap: 3rem; white-space: nowrap; animation: marquee 22s linear infinite; }
@@ -146,14 +148,14 @@
 
   footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; }
   .footer-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; }
-  .footer-logo span { color: var(--accent); }
   .footer-copy { font-size: 0.8rem; color: var(--muted); }
 
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
-    .hero, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
-    .hero-lower { grid-template-columns: 1fr; gap: 2rem; }
+    .hero { padding: 3rem 1.5rem; }
+    .hero-videos { grid-template-columns: 1fr; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
     .portfolio-grid, .services-grid, .testimonial-grid { grid-template-columns: 1fr 1fr; }
     .process-steps { grid-template-columns: 1fr 1fr; }
     .section, .testimonial-wrap, .contact-section { padding: 3rem 1.5rem; }
@@ -165,7 +167,7 @@
 <body>
 
 <nav>
-  <div class="nav-logo">Frame<span>&</span>Found</div>
+  <div class="nav-logo">Home Range</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
@@ -178,33 +180,44 @@
 <section class="hero">
   <p class="hero-eyebrow">Founder video for small business</p>
   <h1 class="hero-title">Your story is your <em>edge</em></h1>
-  <div class="hero-lower">
-    <div>
-      <p class="hero-desc">We help small business founders show up on camera with confidence — creating professional video content that builds trust, drives enquiries, and grows your brand.</p>
-      <div class="hero-actions">
-        <a href="#work" class="btn-primary">Watch our work</a>
-        <a href="#services" class="btn-ghost">See packages</a>
-      </div>
-      <div class="trust-bar">
-        <div class="trust-avatars">
-          <div class="avatar av1">SR</div>
-          <div class="avatar av2">MK</div>
-          <div class="avatar av3">JT</div>
-          <div class="avatar av4">AL</div>
-        </div>
-        <div class="trust-text"><strong>80+ founders</strong> have told their story with us</div>
-      </div>
+  <p class="hero-desc">We help small business founders show up on camera with confidence — creating professional video content that builds trust, drives enquiries, and grows your brand.</p>
+  <div class="hero-actions">
+    <a href="#work" class="btn-primary">Watch our work</a>
+    <a href="#services" class="btn-ghost">See packages</a>
+  </div>
+  <div class="trust-bar">
+    <div class="trust-avatars">
+      <div class="avatar av1">SR</div>
+      <div class="avatar av2">MK</div>
+      <div class="avatar av3">JT</div>
+      <div class="avatar av4">AL</div>
     </div>
-    <div class="hero-video-row">
-      <!-- HERO VIDEO — to swap, replace RUpj6ii47Zo with your new YouTube video ID -->
+    <div class="trust-text"><strong>80+ founders</strong> have told their story with us</div>
+  </div>
+
+  <!-- HERO VIDEOS — to swap, replace the YouTube ID after /embed/ with your new video ID -->
+  <div class="hero-videos">
+    <div>
       <div class="video-embed-wrap">
         <iframe
           src="https://www.youtube.com/embed/RUpj6ii47Zo?rel=0&modestbranding=1"
-          title="Frame & Found — Featured founder story"
+          title="Home Range — Featured founder story"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
       </div>
+      <div class="video-caption"><strong>Kira's Ceramics Co.</strong> — Founder story</div>
+    </div>
+    <div>
+      <div class="video-embed-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/7sbL5rxPxfA?rel=0&modestbranding=1"
+          title="Home Range — Brand film"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-caption"><strong>The Oak Desk</strong> — Brand film</div>
     </div>
   </div>
 </section>
@@ -251,7 +264,7 @@
       </div>
     </div>
     <div>
-      <p class="about-body">Frame & Found was built for small business owners who know they should be on camera — but aren't sure how to show up, what to say, or how to make it look professional without a Hollywood budget.</p>
+      <p class="about-body">Home Range was built for small business owners who know they should be on camera — but aren't sure how to show up, what to say, or how to make it look professional without a Hollywood budget.</p>
       <p class="about-body">We handle everything: the script, the shoot, the edit. You just show up and talk about what you love. We take it from there and turn it into video that actually converts.</p>
     </div>
   </div>
@@ -425,7 +438,7 @@
   <div class="testimonial-grid">
     <div class="testimonial-card">
       <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
-      <p class="testimonial-quote">"I'd been putting off getting on camera for two years. The Frame & Found team made it completely painless — and the final video had three new clients reaching out within a week."</p>
+      <p class="testimonial-quote">"I'd been putting off getting on camera for two years. The Home Range team made it completely painless — and the final video had three new clients reaching out within a week."</p>
       <div class="testimonial-author">
         <div class="author-avatar av1">SR</div>
         <div>
@@ -466,7 +479,7 @@
       <h2 class="contact-title">Ready to tell your story?</h2>
       <p class="contact-sub">Book a free 20-minute discovery call and we'll figure out exactly what kind of video will work best for your business.</p>
       <div class="contact-detail">
-        <div class="contact-row"><strong>Email</strong> hello@frameandfound.co</div>
+        <div class="contact-row"><strong>Email</strong> hello@homerange.co</div>
         <div class="contact-row"><strong>Phone</strong> +61 8 9000 0000</div>
         <div class="contact-row"><strong>Location</strong> Perth, Western Australia</div>
         <div class="contact-row"><strong>Turnaround</strong> We reply within one business day</div>
@@ -510,8 +523,8 @@
 </section>
 
 <footer>
-  <div class="footer-logo">Frame<span>&</span>Found</div>
-  <div class="footer-copy">© 2026 Frame & Found. All rights reserved.</div>
+  <div class="footer-logo">Home Range</div>
+  <div class="footer-copy">© 2026 Home Range. All rights reserved.</div>
 </footer>
 
 </body>
