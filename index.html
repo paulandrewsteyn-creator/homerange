@@ -346,6 +346,181 @@
   </div>
 </div>
 
+<!-- ============================================================
+     MULTIPLATFORM DELIVERY SECTION
+     Paste this entire block into your index.html
+     Recommended placement: just before your process or services section
+     ============================================================ -->
+
+<style>
+  .mp-wrap { font-family: 'DM Sans', sans-serif; padding: 5rem 3rem; max-width: 1100px; margin: 0 auto; }
+  .mp-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #888780; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+  .mp-label::after { content: ''; flex: 1; height: 1px; background: rgba(17,17,16,0.1); }
+  .mp-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.75rem; color: #111110; }
+  .mp-title em { font-style: italic; color: #BA7517; }
+  .mp-subtitle { font-size: 0.95rem; color: #888780; line-height: 1.85; max-width: 52ch; margin-bottom: 3rem; }
+  .mp-steps { display: flex; flex-direction: column; gap: 0; }
+  .mp-step-row { display: grid; grid-template-columns: 48px 1fr; gap: 0 1.5rem; }
+  .mp-step-line { display: flex; flex-direction: column; align-items: center; }
+  .mp-step-dot { width: 12px; height: 12px; border-radius: 50%; background: #BA7517; flex-shrink: 0; margin-top: 4px; }
+  .mp-step-connector { width: 1px; flex: 1; background: rgba(17,17,16,0.1); margin: 6px 0; min-height: 24px; }
+  .mp-step-num { font-size: 0.7rem; font-weight: 500; color: #BA7517; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
+  .mp-step-name { font-size: 1rem; font-weight: 500; color: #111110; margin-bottom: 0.4rem; }
+  .mp-step-desc { font-size: 0.875rem; color: #888780; line-height: 1.8; margin-bottom: 1.5rem; }
+  .mp-step-content { padding-bottom: 0.5rem; }
+  .mp-shoot-card { background: #f0ece4; border-radius: 1rem; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1.25rem; }
+  .mp-shoot-icon { width: 44px; height: 44px; border-radius: 0.5rem; background: #111110; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .mp-shoot-icon svg { width: 22px; height: 22px; }
+  .mp-shoot-card-title { font-size: 0.9rem; font-weight: 500; color: #111110; }
+  .mp-shoot-card-sub { font-size: 0.8rem; color: #888780; margin-top: 2px; }
+  .mp-output-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .mp-output-card { border-radius: 1rem; overflow: hidden; border: 0.5px solid rgba(17,17,16,0.1); background: #f9f7f4; }
+  .mp-output-card-header { padding: 0.875rem 1rem 0.75rem; border-bottom: 0.5px solid rgba(17,17,16,0.1); }
+  .mp-output-platform { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #888780; margin-bottom: 0.3rem; }
+  .mp-output-format { font-size: 0.9rem; font-weight: 500; color: #111110; }
+  .mp-output-preview { display: flex; align-items: center; justify-content: center; padding: 1rem; background: #f0ece4; }
+  .mp-video-landscape { width: 100%; aspect-ratio: 16/9; background: #e0dcd4; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .mp-video-vertical { width: 52%; aspect-ratio: 9/16; background: #e0dcd4; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .mp-video-square { width: 72%; aspect-ratio: 1/1; background: #e0dcd4; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .mp-play-circle { width: 28px; height: 28px; border-radius: 50%; background: #BA7517; display: flex; align-items: center; justify-content: center; }
+  .mp-play-circle svg { width: 12px; height: 12px; fill: white; margin-left: 2px; }
+  .mp-output-meta { padding: 0.5rem 1rem 0.875rem; }
+  .mp-output-duration { font-size: 0.75rem; color: #888780; }
+  .mp-output-uses { font-size: 0.75rem; color: #888780; margin-top: 2px; }
+  .mp-output-uses span { color: #111110; font-weight: 500; }
+  .mp-result-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 2rem; }
+  .mp-result-stat { background: #f0ece4; border-radius: 0.5rem; padding: 1rem; text-align: center; }
+  .mp-result-num { font-family: 'DM Serif Display', serif; font-size: 2.4rem; color: #BA7517; line-height: 1; margin-bottom: 0.3rem; }
+  .mp-result-label { font-size: 0.75rem; color: #888780; }
+  .mp-cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .mp-cta-btn { font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 500; padding: 0.7rem 1.5rem; border-radius: 2rem; cursor: pointer; background: #111110; color: #f9f7f4; border: none; transition: opacity 0.2s; text-decoration: none; display: inline-block; }
+  .mp-cta-btn:hover { opacity: 0.8; }
+  .mp-cta-btn-ghost { background: transparent; color: #111110; border: 0.5px solid rgba(17,17,16,0.3); }
+  .mp-cta-btn-ghost:hover { background: #f0ece4; opacity: 1; }
+  @media (max-width: 768px) {
+    .mp-wrap { padding: 3rem 1.5rem; }
+    .mp-output-grid { grid-template-columns: 1fr; }
+    .mp-result-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<section class="mp-wrap">
+  <div class="mp-label">Multiplatform delivery</div>
+  <h2 class="mp-title">Film once. <em>Publish everywhere.</em></h2>
+  <p class="mp-subtitle">One shoot day gives you a full library of content — landscape films, vertical reels, commercials, and social clips, all cut from the same footage.</p>
+
+  <div class="mp-steps">
+
+    <div class="mp-step-row">
+      <div class="mp-step-line">
+        <div class="mp-step-dot"></div>
+        <div class="mp-step-connector"></div>
+      </div>
+      <div class="mp-step-content">
+        <div class="mp-step-num">Step 01</div>
+        <div class="mp-step-name">One shoot day</div>
+        <div class="mp-step-desc">We come to you — or you come to us. A single relaxed shoot day captures everything we need: your story, your space, your personality, and the scenes that make your business real.</div>
+        <div class="mp-shoot-card">
+          <div class="mp-shoot-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M15 10l4.553-2.069A1 1 0 0121 8.873v6.254a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+          </div>
+          <div>
+            <div class="mp-shoot-card-title">Full day on location</div>
+            <div class="mp-shoot-card-sub">Interviews, b-roll, action shots, testimonials — all captured in one session</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mp-step-row">
+      <div class="mp-step-line">
+        <div class="mp-step-dot"></div>
+        <div class="mp-step-connector"></div>
+      </div>
+      <div class="mp-step-content">
+        <div class="mp-step-num">Step 02</div>
+        <div class="mp-step-name">We edit for every platform</div>
+        <div class="mp-step-desc">The same raw footage gets shaped into multiple outputs — each one optimised for its platform, aspect ratio, audience, and purpose.</div>
+        <div class="mp-output-grid">
+          <div class="mp-output-card">
+            <div class="mp-output-card-header">
+              <div class="mp-output-platform">YouTube</div>
+              <div class="mp-output-format">Landscape film</div>
+            </div>
+            <div class="mp-output-preview">
+              <div class="mp-video-landscape"><div class="mp-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+            </div>
+            <div class="mp-output-meta">
+              <div class="mp-output-duration">3–5 min · 16:9</div>
+              <div class="mp-output-uses">Use for: <span>website hero, YouTube channel</span></div>
+            </div>
+          </div>
+          <div class="mp-output-card">
+            <div class="mp-output-card-header">
+              <div class="mp-output-platform">Instagram · TikTok</div>
+              <div class="mp-output-format">Vertical reels</div>
+            </div>
+            <div class="mp-output-preview">
+              <div class="mp-video-vertical"><div class="mp-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+            </div>
+            <div class="mp-output-meta">
+              <div class="mp-output-duration">15–60 sec · 9:16</div>
+              <div class="mp-output-uses">Use for: <span>Reels, Shorts, TikTok</span></div>
+            </div>
+          </div>
+          <div class="mp-output-card">
+            <div class="mp-output-card-header">
+              <div class="mp-output-platform">LinkedIn · Facebook</div>
+              <div class="mp-output-format">Square commercial</div>
+            </div>
+            <div class="mp-output-preview">
+              <div class="mp-video-square"><div class="mp-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+            </div>
+            <div class="mp-output-meta">
+              <div class="mp-output-duration">30–90 sec · 1:1</div>
+              <div class="mp-output-uses">Use for: <span>paid ads, LinkedIn, Facebook</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mp-step-row">
+      <div class="mp-step-line">
+        <div class="mp-step-dot"></div>
+      </div>
+      <div class="mp-step-content">
+        <div class="mp-step-num">Step 03</div>
+        <div class="mp-step-name">You get a full content library</div>
+        <div class="mp-step-desc">One shoot day becomes months of content. Every video is delivered ready to publish — captioned, colour-graded, and sized for its platform.</div>
+        <div class="mp-result-row">
+          <div class="mp-result-stat">
+            <div class="mp-result-num">1</div>
+            <div class="mp-result-label">Shoot day</div>
+          </div>
+          <div class="mp-result-stat">
+            <div class="mp-result-num">3+</div>
+            <div class="mp-result-label">Formats delivered</div>
+          </div>
+          <div class="mp-result-stat">
+            <div class="mp-result-num">10+</div>
+            <div class="mp-result-label">Videos in your library</div>
+          </div>
+        </div>
+        <div class="mp-cta-row">
+          <a href="#services" class="mp-cta-btn">See our packages</a>
+          <a href="#contact" class="mp-cta-btn mp-cta-btn-ghost">Book a free call</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     END MULTIPLATFORM DELIVERY SECTION
+     ============================================================ -->
+
 <div class="testimonial-wrap">
   <div class="section-label">What founders say</div>
   <div class="testimonial-grid">
