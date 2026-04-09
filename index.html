@@ -109,21 +109,6 @@
   .step-name { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-bottom: 0.6rem; }
   .step-desc { font-size: 0.825rem; color: rgba(255,255,255,0.45); line-height: 1.8; }
 
-  .services-wrap { background: var(--cream); padding: 5rem 0; }
-  .services-inner { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
-  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1rem; }
-  .service-card { background: var(--white); border-radius: 1rem; padding: 2rem; border: 1px solid var(--border); }
-  .service-tag { display: inline-block; background: var(--accent-light); color: var(--accent); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 2rem; margin-bottom: 1.25rem; }
-  .service-name { font-family: 'DM Serif Display', serif; font-size: 1.35rem; margin-bottom: 0.75rem; line-height: 1.2; }
-  .service-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
-  .service-price { font-size: 0.8rem; display: flex; align-items: baseline; gap: 0.4rem; }
-  .price-from { color: var(--muted); }
-  .price-amount { font-family: 'DM Serif Display', serif; font-size: 1.6rem; }
-  .service-features { list-style: none; margin-top: 1.25rem; border-top: 1px solid var(--border); padding-top: 1.25rem; display: flex; flex-direction: column; gap: 0.6rem; }
-  .service-features li { font-size: 0.825rem; color: var(--muted); display: flex; align-items: center; gap: 0.6rem; }
-  .feature-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-  .service-card.featured { border-color: var(--accent); }
-  .service-card.featured .service-tag { background: var(--black); color: var(--white); }
 
   .testimonial-wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 3rem; }
   .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
@@ -163,10 +148,10 @@
     .hero { padding: 3rem 1.5rem; }
     .hero-videos { grid-template-columns: 1fr; }
     .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .portfolio-grid, .services-grid, .testimonial-grid { grid-template-columns: 1fr 1fr; }
+    .portfolio-grid, .testimonial-grid { grid-template-columns: 1fr 1fr; }
     .process-steps { grid-template-columns: 1fr 1fr; }
     .section, .testimonial-wrap, .contact-section { padding: 3rem 1.5rem; }
-    .process-inner, .services-inner { padding: 0 1.5rem; }
+    .process-inner { padding: 0 1.5rem; }
     footer { flex-direction: column; gap: 1rem; padding: 1.5rem; }
   }
 </style>
@@ -178,7 +163,6 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
-    <li><a href="#services">Packages</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Book a call</a>
@@ -190,7 +174,6 @@
   <p class="hero-desc"> People-driven, documentary style, professional video content that builds trust, drives enquiries, and grows your brand. Multi-format, short and long-form videos, based in Cape Town and across South Africa.</p>
   <div class="hero-actions">
     <a href="#contact" class="btn-primary">Book a free call</a>
-    <a href="#services" class="btn-ghost">See packages</a>
   </div>
   <div class="trust-bar">
     <div class="trust-avatars">
@@ -363,62 +346,6 @@
   </div>
 </div>
 
-<div class="services-wrap" id="services">
-  <div class="services-inner">
-    <div class="section-label" style="margin-bottom: 2.5rem;">Packages & pricing</div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-tag">Starter</div>
-        <div class="service-name">The Origin Story</div>
-        <p class="service-desc">Perfect for founders who want a single, powerful video to anchor their website and introduce themselves to the world.</p>
-        <div class="service-price">
-          <span class="price-from">From</span>
-          <span class="price-amount">$1,200</span>
-        </div>
-        <ul class="service-features">
-          <li><span class="feature-dot"></span>Half-day shoot (up to 3 hrs)</li>
-          <li><span class="feature-dot"></span>1 × 2–3 min founder story video</li>
-          <li><span class="feature-dot"></span>Script & prep guide included</li>
-          <li><span class="feature-dot"></span>2 rounds of revisions</li>
-          <li><span class="feature-dot"></span>Delivered within 5 business days</li>
-        </ul>
-      </div>
-      <div class="service-card featured">
-        <div class="service-tag">Most popular</div>
-        <div class="service-name">The Full Picture</div>
-        <p class="service-desc">A full shoot day that gives you a flagship brand film plus a library of social-ready clips to use all year long.</p>
-        <div class="service-price">
-          <span class="price-from">From</span>
-          <span class="price-amount">$2,800</span>
-        </div>
-        <ul class="service-features">
-          <li><span class="feature-dot"></span>Full-day shoot (up to 8 hrs)</li>
-          <li><span class="feature-dot"></span>1 × brand film (3–5 min)</li>
-          <li><span class="feature-dot"></span>6 × short-form social clips</li>
-          <li><span class="feature-dot"></span>Script, coaching & shot list</li>
-          <li><span class="feature-dot"></span>Delivered within 7 business days</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <div class="service-tag">Ongoing</div>
-        <div class="service-name">Always On</div>
-        <p class="service-desc">Monthly video content so you're consistently showing up — without the effort of planning and producing it yourself.</p>
-        <div class="service-price">
-          <span class="price-from">From</span>
-          <span class="price-amount">$900/mo</span>
-        </div>
-        <ul class="service-features">
-          <li><span class="feature-dot"></span>Monthly half-day shoot</li>
-          <li><span class="feature-dot"></span>8 × edited social videos/mo</li>
-          <li><span class="feature-dot"></span>Content strategy & calendar</li>
-          <li><span class="feature-dot"></span>Captions & platform sizing</li>
-          <li><span class="feature-dot"></span>Priority turnaround</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="testimonial-wrap">
   <div class="section-label">What founders say</div>
   <div class="testimonial-grid">
@@ -490,15 +417,6 @@
       <div class="form-group">
         <label>Your business type</label>
         <input type="text" name="business_type" placeholder="e.g. Café, law firm, personal trainer..." required>
-      </div>
-      <div class="form-group">
-        <label>Package interested in</label>
-        <select name="package">
-          <option>The Origin Story — from $1,200</option>
-          <option>The Full Picture — from $2,800</option>
-          <option>Always On — from $900/mo</option>
-          <option>Not sure yet — let's chat</option>
-        </select>
       </div>
       <div class="form-group">
         <label>Anything else we should know?</label>
